@@ -74,9 +74,9 @@ export function handleSummary(data) {
   const response = http.post(pushUrl, promMetrics);
   
   if (response.status === 200 || response.status === 202) {
-    console.log('\n✅ Metrics pushed to Pushgateway successfully\n');
+    console.log('\n[INFO] Metrics pushed to Pushgateway successfully\n');
   } else {
-    console.log(`\n⚠️ Pushgateway returned status ${response.status}\n`);
+    console.log(`\n[WARN] Pushgateway returned status ${response.status}\n`);
   }
   
   // Print summary

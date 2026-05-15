@@ -16,9 +16,9 @@ docker compose -f /home/abdum/services/monitoring-tool/docker-compose.yml exec -
 EXIT_CODE=$?
 
 if [ $EXIT_CODE -eq 0 ]; then
-    echo "[$TIMESTAMP] ✅ Daily smoke test PASSED"
+    echo "[$TIMESTAMP] PASSED: Daily smoke test"
 else
-    echo "[$TIMESTAMP] ❌ Daily smoke test FAILED"
+    echo "[$TIMESTAMP] FAILED: Daily smoke test"
 fi
 
 # Keep last 7 daily logs (1 week)

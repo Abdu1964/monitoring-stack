@@ -14,9 +14,9 @@ docker compose -f /home/abdum/services/monitoring-tool/docker-compose.yml exec -
 EXIT_CODE=$?
 
 if [ $EXIT_CODE -eq 0 ]; then
-    echo "[$TIMESTAMP] ✅ Weekly load test PASSED"
+    echo "[$TIMESTAMP] PASSED: Weekly load test"
 else
-    echo "[$TIMESTAMP] ❌ Weekly load test FAILED - exit code $EXIT_CODE"
+    echo "[$TIMESTAMP] FAILED: Weekly load test - exit code $EXIT_CODE"
     # Send alert (optional)
 fi
 

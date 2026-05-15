@@ -39,7 +39,7 @@ const QUERIES = [
 let accessToken = null;
 
 export function setup() {
-  console.log('\n🔐 Attempting login...\n');
+  console.log('\n[INFO] Attempting login...\n');
   
   // Login request
   const loginData = {
@@ -72,11 +72,11 @@ export function setup() {
   }
   
   if (!sessionCookie) {
-    console.log('❌ No session cookie found');
+    console.log('[ERROR] No session cookie found');
     return { token: null };
   }
   
-  console.log('📝 Session cookie found, extracting token...');
+  console.log('[INFO] Session cookie found, extracting token...');
   
   // Decode session cookie to extract access token
   try {
@@ -100,21 +100,21 @@ export function setup() {
     const token = data.user?.access_token;
     
     if (token) {
-      console.log(`✅ Token extracted successfully (length: ${token.length})\n`);
+      console.log(`[INFO] Token extracted successfully (length: ${token.length})\n`);
       return { token: token };
     } else {
-      console.log('❌ No access_token in decoded data\n');
+      console.log('[ERROR] No access_token in decoded data\n');
       return { token: null };
     }
   } catch (e) {
-    console.log(`❌ Token extraction failed: ${e}\n`);
+    console.log(`[ERROR] Token extraction failed: ${e}\n`);
     return { token: null };
   }
 }
 
 export default function(data) {
   if (!data.token) {
-    console.log('⚠️ No token available, skipping iteration');
+    console.log('[WARN] No token available, skipping iteration');
     sleep(1);
     return;
   }
@@ -143,9 +143,9 @@ export default function(data) {
   });
   
   if (success) {
-    console.log(`✅ Query success: "${query.substring(0, 30)}..." (${queryResponse.timings.duration.toFixed(0)}ms)`);
+    console.log(`[INFO] Query success: "${query.substring(0, 30)}..." (${queryResponse.timings.duration.toFixed(0)}ms)`);
   } else {
-    console.log(`❌ Query failed: "${query.substring(0, 30)}..." (Status: ${queryResponse.status})`);
+    console.log(`[ERROR] Query failed: "${query.substring(0, 30)}..." (Status: ${queryResponse.status})`);
   }
   
   // Wait between requests (like Locust wait_time between 5-15 seconds)
@@ -188,7 +188,7 @@ export function handleSummary(data) {
   const response = http.post(pushUrl, promMetrics);
   
   if (response.status === 200 || response.status === 202) {
-    console.log('\n✅ Metrics pushed to Pushgateway successfully\n');
+    console.log('\n[INFO] Metrics pushed to Pushgateway successfully\n');
   }
   
   // Print summary
